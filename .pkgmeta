@@ -1,0 +1,9 @@
+externals:
+  Libs/Ace3:
+    url: https://repos.wowace.com/wow/ace3/trunk
+
+ignore:
+  - .git
+  - .github
+  - README.md
+  - LICENSE
