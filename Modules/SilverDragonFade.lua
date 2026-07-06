@@ -1,7 +1,7 @@
 ------------------------------------------------------------
 -- SilverDragon History Module
 -- Fades the history window unless:
---   • Mouse is over it
+--   • Mouse is over it (including child elements)
 --   • A new rare/treasure is discovered
 ------------------------------------------------------------
 
@@ -27,7 +27,6 @@ local db
 local frame
 local updater
 
-local mouseOver = false
 local visibleUntil = 0
 local fading = false
 
@@ -89,21 +88,6 @@ function Module:Initialize()
     end
 
     --------------------------------------------------------
-    -- Mouseover
-    --------------------------------------------------------
-
-    frame:HookScript("OnEnter", function()
-        frame:EnableMouse(true)
-
-        mouseOver = true
-        ShowFrame()
-    end)
-
-    frame:HookScript("OnLeave", function()
-        mouseOver = false
-    end)
-
-    --------------------------------------------------------
     -- Hook SilverDragon History
     --------------------------------------------------------
 
@@ -128,7 +112,9 @@ function Module:Initialize()
     --------------------------------------------------------
 
     updater = SmartUIFade:CreateUpdater(function()
-        if mouseOver then
+        -- Use IsMouseOver() to detect the cursor anywhere within
+        -- the frame's bounding box, including over its children.
+        if frame:IsMouseOver() then
             ShowFrame()
             return
         end

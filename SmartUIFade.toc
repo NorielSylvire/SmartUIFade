@@ -24,6 +24,7 @@ SmartUIFade.lua
 Modules\ChatFade.lua
 Modules\KTrackerFade.lua
 Modules\SilverDragonFade.lua
+Modules\DetailsFade.lua
 
 # Config
 Config.lua
